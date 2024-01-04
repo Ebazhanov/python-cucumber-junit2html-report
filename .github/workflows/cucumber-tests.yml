@@ -32,7 +32,7 @@ jobs:
 
     - name: Convert JUnit XML to HTML
       run: |
-        junit2html reports/*.xml -o reports/html-reports
+        junit2html reports/*.xml
 
     - name: Upload JUnit HTML reports
       uses: actions/upload-artifact@v2
