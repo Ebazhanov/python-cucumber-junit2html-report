@@ -1,5 +1,3 @@
-name: Cucumber Tests
-
 on:
   push:
     branches:
@@ -28,8 +26,16 @@ jobs:
         python -m behave --junit --junit-directory=reports
       continue-on-error: true  # Continue even if tests fail to ensure the report is generated
 
-    - name: Upload JUnit XML report
+    - name: Install junit2html
+      run: |
+        pip install junit2html
+
+    - name: Convert JUnit XML to HTML
+      run: |
+        junit2html reports/*.xml --output reports/html-reports
+
+    - name: Upload JUnit HTML reports
       uses: actions/upload-artifact@v2
       with:
-        name: junit-reports
-        path: reports
+        name: junit-html-reports
+        path: reports/html-reports
