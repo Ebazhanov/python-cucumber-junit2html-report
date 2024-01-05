@@ -32,6 +32,11 @@ jobs:
       run: |
         cat reports/*.xml > merged_reports.xml
 
+    - name: Install xsltproc
+      run: |
+        sudo apt-get update
+        sudo apt-get install xsltproc
+
     - name: Convert Merged JUnit XML to HTML
       run: |
         xsltproc -o reports/html-reports/merged_report.html /usr/share/xml/docbook/stylesheet/docbook-xsl-ns/xhtml/chunk.xsl merged_reports.xml
