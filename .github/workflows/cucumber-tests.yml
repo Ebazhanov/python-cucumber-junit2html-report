@@ -49,3 +49,7 @@ jobs:
       with:
         name: junit-html-reports
         path: reports
+
+    - name: Set Workflow Run ID
+      id: set_workflow_run_id
+      run: echo "workflow_run_id=${{ github.run_id }}" >> $GITHUB_ENV

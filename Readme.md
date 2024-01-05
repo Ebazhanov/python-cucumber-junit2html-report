@@ -1,3 +1,5 @@
+[![Cucumber Tests](https://github.com/Ebazhanov/python-cucumber-junit2html-report/workflows/cucumber-tests/badge.svg)](https://github.com/Ebazhanov/python-cucumber-junit2html-report/actions?query=workflow%3Acucumber-tests+event%3Aworkflow_run)
+
 ## Automated Testing with "junit2html" Plugin
 
 This project utilizes the [junit2html](https://github.com/inorton/junit2html) plugin to convert test result files from `*.xml` format to `*.html`. Additionally, in the case of multiple test reports, the plugin is used to merge them into a single `*.html` report file.
