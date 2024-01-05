@@ -21,32 +21,21 @@ jobs:
       run: |
         pip install -r requirements.txt
 
-    - name: Create reports directory
-      run: mkdir -p reports
-
-    - name: Run Cucumber tests and capture detailed output
+    - name: Run Cucumber tests
       run: |
-        set -x
-        behave --format junit --outfile reports/
+        behave features/**/*.feature --junit
       continue-on-error: true  # Continue even if tests fail to ensure the report is generated
 
-    - name: Display Behave output
-      run: cat behave_output.log
+    - name: Merge JUnit XML reports
+      run: |
+        junit2html reports/*.xml --merge=reports/merged_results.xml
+
+    - name: Generate HTML report
+      run: |
+        junit2html reports/merged_results.xml --report-matrix=reports/summary_report.html
 
     - name: List contents of the reports directory
       run: ls -R reports
-
-    - name: Install pytest and pytest-html
-      run: |
-        pip install pytest pytest-html
-
-    - name: Convert JUnit XML to HTML using pytest-html
-      run: |
-        pytest --junitxml=reports/merged_results.xml --html=reports/summary_report.html
-
-    - name: List HTML reports
-      run: |
-        ls -R reports
 
     - name: Upload JUnit HTML reports
       uses: actions/upload-artifact@v2
