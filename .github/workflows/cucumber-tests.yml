@@ -9,6 +9,13 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        test_set:
+          - set1
+          - set2
+          # Add more sets as needed
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -24,22 +31,16 @@ jobs:
 
     - name: Run Cucumber tests and generate JUnit XML reports
       run: |
-        # Replace the following command with the actual command to run your Cucumber tests
-        python -m behave --junit --junit-directory=reports
-      continue-on-error: true  # Continue even if tests fail to ensure the report is generated
+        # Replace the following command with the actual command to run your Cucumber tests for the specific set
+        python -m behave --junit --junit-directory=reports/${{ matrix.test_set }}
 
     - name: Concatenate JUnit XML reports
       run: |
-        cat reports/*.xml > merged_reports.xml
-
-    - name: Install xsltproc
-      run: |
-        sudo apt-get update
-        sudo apt-get install xsltproc
+        cat reports/${{ matrix.test_set }}/*.xml > merged_reports_${{ matrix.test_set }}.xml
 
     - name: Convert Merged JUnit XML to HTML
       run: |
-        xsltproc -o reports/html-reports/merged_report.html /usr/share/xml/docbook/stylesheet/docbook-xsl-ns/xhtml/chunk.xsl merged_reports.xml
+        junit2html merged_reports_${{ matrix.test_set }}.xml -o reports/html-reports/merged_report_${{ matrix.test_set }}.html
 
     - name: List HTML reports
       run: |
