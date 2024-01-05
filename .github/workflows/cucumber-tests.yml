@@ -18,7 +18,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
-    - name: Run Cucumber tests and generate JUnit XML reports
+    - name: Run Cucumber tests and generate merged JUnit XML report
       run: |
         # Replace the following command with the actual command to run your Cucumber tests
         python -m behave --junit --junit-directory=reports
@@ -26,19 +26,14 @@ jobs:
     - name: Install junit2html
       run: |
         pip install junit2html
-    - name: Convert JUnit XML to HTML for each report
+    - name: Convert Merged JUnit XML to HTML
       run: |
-        find reports -name '*.xml' -exec sh -c 'junit2html "$0" > "${0%.xml}.html"' {} \;
-    - name: Merge HTML reports
+        junit2html reports/merged_results.xml --report-matrix=reports/summary_report.html
+    - name: List HTML reports
       run: |
-        # Replace the following command with the actual command to merge HTML reports
-        # e.g., merge-html-reports reports/*.html > merged-report.html
-        echo "Command to merge reports here"
-    - name: List Merged HTML report
-      run: |
-        ls merged-report.html
-    - name: Upload Merged HTML report
+        ls -R reports
+    - name: Upload JUnit HTML reports
       uses: actions/upload-artifact@v2
       with:
-        name: junit-merged-html-report
-        path: merged-report.html
+        name: junit-html-reports
+        path: reports
