@@ -24,10 +24,13 @@ jobs:
     - name: Create reports directory
       run: mkdir -p reports
 
-    - name: Run Cucumber tests and generate JUnit XML report
+    - name: Run Cucumber tests and capture output
       run: |
-        behave -f junit -o reports/
+        behave -f junit -o reports/ > behave_output.log 2>&1
       continue-on-error: true  # Continue even if tests fail to ensure the report is generated
+
+    - name: Display Behave output
+      run: cat behave_output.log
 
     - name: List contents of the reports directory
       run: ls -R reports
