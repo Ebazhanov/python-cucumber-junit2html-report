@@ -21,13 +21,9 @@ jobs:
       run: |
         pip install -r requirements.txt
 
-    - name: Install junit2html
-      run: |
-        pip install junit2html
-
     - name: Run Cucumber tests
       run: |
-        behave --steps steps --junit features/
+        behave --junit --junit-directory=reports/
       continue-on-error: true
 
     - name: Create reports directory
