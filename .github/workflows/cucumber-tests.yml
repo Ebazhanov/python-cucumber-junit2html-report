@@ -29,11 +29,16 @@ jobs:
     - name: Convert JUnit XML to HTML for each report
       run: |
         find reports -name '*.xml' -exec sh -c 'junit2html "$0" > "${0%.xml}.html"' {} \;
-    - name: List HTML reports
+    - name: Merge HTML reports
       run: |
-        ls -R reports
-    - name: Upload JUnit HTML reports
+        # Replace the following command with the actual command to merge HTML reports
+        # e.g., merge-html-reports reports/*.html > merged-report.html
+        echo "Command to merge reports here"
+    - name: List Merged HTML report
+      run: |
+        ls merged-report.html
+    - name: Upload Merged HTML report
       uses: actions/upload-artifact@v2
       with:
-        name: junit-html-reports
-        path: reports
+        name: junit-merged-html-report
+        path: merged-report.html
