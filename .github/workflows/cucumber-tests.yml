@@ -30,7 +30,8 @@ jobs:
         pip install junit2html
     - name: Convert Merged JUnit XML to HTML
       run: |
-        junit2html reports/merged_results.xml --report-matrix=reports/summary_report.html
+        junit2html $GITHUB_WORKSPACE/reports/merged_results.xml --report-matrix=$GITHUB_WORKSPACE/reports/summary_report.html
+
     - name: List HTML reports
       run: |
         ls -R reports
