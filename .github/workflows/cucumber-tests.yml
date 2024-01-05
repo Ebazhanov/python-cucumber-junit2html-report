@@ -1,5 +1,4 @@
 name: Cucumber Tests
-
 on:
   push:
     branches:
@@ -34,14 +33,10 @@ jobs:
 
     - name: Convert JUnit XML to HTML
       run: |
-        junit2html reports/*.xml
-
-    - name: List HTML reports
-      run: |
-        ls -R reports
+        junit2html reports/*.xml -o reports/html-reports
 
     - name: Upload JUnit HTML reports
       uses: actions/upload-artifact@v2
       with:
         name: junit-html-reports
-        path: reports
+        path: reports/html-reports
