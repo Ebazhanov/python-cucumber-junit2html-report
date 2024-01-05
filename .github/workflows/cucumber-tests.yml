@@ -4,45 +4,35 @@ on:
   push:
     branches:
       - main
-
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
         python-version: 3.11
-
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
-
     - name: Run Cucumber tests and generate JUnit XML report
       run: |
+        # Replace the following command with the actual command to run your Cucumber tests
         python -m behave --junit --junit-directory=reports
       continue-on-error: true  # Continue even if tests fail to ensure the report is generated
-
     - name: Install junit2html
       run: |
         pip install junit2html
-
     - name: Convert JUnit XML to HTML
       run: |
-        cd reports && junit2html *.xml && cd ..
-
-    - name: Create HTML reports directory
-      run: mkdir -p reports/html-reports
-
-    - name: Copy HTML reports
-      run: cp reports/*.html reports/html-reports
-
+        junit2html reports/*.xml
+    - name: List HTML reports
+      run: |
+        ls -R reports
     - name: Upload JUnit HTML reports
       uses: actions/upload-artifact@v2
       with:
         name: junit-html-reports
-        path: reports/html-reports
+        path: reports
