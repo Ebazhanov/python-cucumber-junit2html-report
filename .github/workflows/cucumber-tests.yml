@@ -27,7 +27,7 @@ jobs:
 
     - name: Run Cucumber tests
       run: |
-        behave --steps features/**/*.feature --junit
+        behave --steps steps --junit features/**/*.feature
       continue-on-error: true
 
     - name: Create reports directory
