@@ -17,11 +17,14 @@ This project utilizes the [junit2html](https://github.com/inorton/junit2html) pl
 #### Project structure
 
     python-cucumber/
+    |
     |-- .github/
     |   |-- workflows/
     |       |-- cucumber-test.yml
+    |
     |-- src/
     |   |-- your_python_module1.py
+    |
     |-- tests/
     |   |-- e2e/
     |   |   |-- features/
@@ -31,5 +34,6 @@ This project utilizes the [junit2html](https://github.com/inorton/junit2html) pl
     |   |   |   |-- test-02.feature
     |   |   |-- steps/
     |   |       |-- steps.py
+    |
     |   |-- unit/
     |       |-- test_your_module1.py
