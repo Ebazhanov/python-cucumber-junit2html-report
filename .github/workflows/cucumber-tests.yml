@@ -22,26 +22,26 @@ jobs:
       run: |
         pip install -r requirements.txt
 
-    - name: Run Cucumber tests and generate JUnit XML report
+    - name: Run Cucumber tests and generate JUnit XML reports
       run: |
         # Replace the following command with the actual command to run your Cucumber tests
         python -m behave --junit --junit-directory=reports
       continue-on-error: true  # Continue even if tests fail to ensure the report is generated
 
-    - name: Install junit2html
+    - name: Concatenate JUnit XML reports
       run: |
-        pip install junit2html
+        cat reports/*.xml > merged_reports.xml
 
-    - name: Convert JUnit XML to HTML
+    - name: Convert Merged JUnit XML to HTML
       run: |
-        junit2html reports/*.xml
+        xsltproc -o reports/html-reports/merged_report.html /usr/share/xml/docbook/stylesheet/docbook-xsl-ns/xhtml/chunk.xsl merged_reports.xml
 
     - name: List HTML reports
       run: |
-        ls -R reports
+        ls -R reports/html-reports
 
     - name: Upload JUnit HTML reports
       uses: actions/upload-artifact@v2
       with:
         name: junit-html-reports
-        path: reports
+        path: reports/html-reports
