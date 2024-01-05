@@ -13,3 +13,23 @@ This project utilizes the [junit2html](https://github.com/inorton/junit2html) pl
 - `$ behave **/*.feature --junit` //Run tests
 - `$ junit2html reports/*.xml --merge=merged_results.xml` // Merge all *.xml files in one
 - `$ junit2html merged_results.xml --report-matrix=summary_report.html` // Generate HTML report
+
+#### Project structure
+
+    python-cucumber/
+    |-- .github/
+    |   |-- workflows/
+    |       |-- cucumber-test.yml
+    |-- src/
+    |   |-- your_python_module1.py
+    |-- tests/
+    |   |-- e2e/
+    |   |   |-- features/
+    |   |   |   |-- steps/
+    |   |   |       |-- steps.py
+    |   |   |   |-- test-01.feature
+    |   |   |   |-- test-02.feature
+    |   |   |-- steps/
+    |   |       |-- steps.py
+    |   |-- unit/
+    |       |-- test_your_module1.py
