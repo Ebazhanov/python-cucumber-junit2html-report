@@ -11,30 +11,37 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
         python-version: 3.11
+
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
-    - name: Run Cucumber tests and generate merged JUnit XML report
+
+    - name: Run Cucumber tests and generate JUnit XML report
       run: |
         # Replace the following command with the actual command to run your Cucumber tests
         python -m behave --junit --junit-directory=reports
       continue-on-error: true  # Continue even if tests fail to ensure the report is generated
+
     - name: List contents of the reports directory
       run: ls -R reports
-    - name: Install junit2html
+
+    - name: Install pytest and pytest-html
       run: |
-        pip install junit2html
-    - name: Convert Merged JUnit XML to HTML
+        pip install pytest pytest-html
+
+    - name: Convert Merged JUnit XML to HTML using pytest-html
       run: |
-        junit2html $GITHUB_WORKSPACE/reports/merged_results.xml --report-matrix=$GITHUB_WORKSPACE/reports/summary_report.html
+        pytest --junitxml=reports/merged_results.xml --html=reports/summary_report.html
 
     - name: List HTML reports
       run: |
         ls -R reports
+
     - name: Upload JUnit HTML reports
       uses: actions/upload-artifact@v2
       with:
