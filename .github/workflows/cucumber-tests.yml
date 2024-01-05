@@ -9,10 +9,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        test_set: [set1]  # Add more sets as needed
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -25,30 +21,27 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
+
+    - name: Run Cucumber tests and generate JUnit XML report
+      run: |
+        # Replace the following command with the actual command to run your Cucumber tests
+        python -m behave --junit --junit-directory=reports
+      continue-on-error: true  # Continue even if tests fail to ensure the report is generated
+
+    - name: Install junit2html
+      run: |
         pip install junit2html
 
-    - name: Run Cucumber tests and generate JUnit XML reports
+    - name: Convert JUnit XML to HTML
       run: |
-        python -m behave --junit --junit-directory=reports/${{ matrix.test_set }}
-
-    - name: Concatenate JUnit XML reports
-      run: |
-        cat reports/${{ matrix.test_set }}/*.xml > merged_reports_${{ matrix.test_set }}.xml
-
-    - name: Convert Merged JUnit XML to HTML
-      run: |
-        junit2html merged_reports_${{ matrix.test_set }}.xml
-
-    - name: Rename HTML report file
-      run: |
-        mv junit-report.html reports/html-reports/merged_report_${{ matrix.test_set }}.html
+        junit2html reports/*.xml
 
     - name: List HTML reports
       run: |
-        ls -R reports/html-reports
+        ls -R reports
 
     - name: Upload JUnit HTML reports
       uses: actions/upload-artifact@v2
       with:
         name: junit-html-reports
-        path: reports/html-reports
+        path: reports
