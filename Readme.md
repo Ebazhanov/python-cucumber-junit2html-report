@@ -34,6 +34,6 @@ This project utilizes the [junit2html](https://github.com/inorton/junit2html) pl
     |   |   |   |-- test-02.feature
     |   |   |-- steps/
     |   |       |-- steps.py
-    |
+    |   |
     |   |-- unit/
     |       |-- test_your_module1.py
