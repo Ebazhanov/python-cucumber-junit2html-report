@@ -21,10 +21,10 @@ jobs:
       run: |
         pip install -r requirements.txt
 
-    - name: Run Cucumber tests and generate JUnit XML report
+    - name: Run Cucumber feature tests and generate JUnit XML report
       run: |
-        # Replace the following command with the actual command to run your Cucumber tests
-        python -m behave --junit --junit-directory=reports
+        # Assuming your cucumber tests are in the 'features' directory
+        cucumber features --format junit --out reports/
       continue-on-error: true  # Continue even if tests fail to ensure the report is generated
 
     - name: List contents of the reports directory
