@@ -11,10 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        test_set:
-          - set1
-          - set2
-          # Add more sets as needed
+        test_set: [set1]  # Add more sets as needed
 
     steps:
     - name: Checkout code
@@ -28,10 +25,10 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
+        pip install junit2html
 
     - name: Run Cucumber tests and generate JUnit XML reports
       run: |
-        # Replace the following command with the actual command to run your Cucumber tests for the specific set
         python -m behave --junit --junit-directory=reports/${{ matrix.test_set }}
 
     - name: Concatenate JUnit XML reports
