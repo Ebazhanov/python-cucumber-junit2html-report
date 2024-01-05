@@ -30,6 +30,9 @@ jobs:
         behave features/**/*.feature --junit
       continue-on-error: true  # Continue even if tests fail to ensure the report is generated
 
+    - name: Create reports directory
+      run: mkdir -p reports
+
     - name: Merge JUnit XML reports
       run: |
         junit2html reports/*.xml --merge=reports/merged_results.xml
