@@ -1,7 +1,9 @@
-## WIP integrate https://github.com/inorton/junit2html
+## Automated Testing with "junit2html" Plugin
+
+This project utilizes the [junit2html](https://github.com/inorton/junit2html) plugin to convert test result files from `*.xml` format to `*.html`. Additionally, in the case of multiple test reports, the plugin is used to merge them into a single `*.html` report file.
 
 ### How to run E2E tests 
-- `$ behave`
+- `$ behave **/*.feature --junit`
 
 ### How to run Unit tests 
 - `$ python -m unittest tests.test_your_module1`
