@@ -1,4 +1,4 @@
-[![Cucumber Tests](https://github.com/Ebazhanov/python-cucumber-junit2html-report/workflows/cucumber-tests/badge.svg)](https://github.com/Ebazhanov/python-cucumber-junit2html-report/actions?query=workflow%3Acucumber-tests+event%3Aworkflow_run)
+[![Cucumber Tests](https://github.com/Ebazhanov/python-cucumber-junit2html-report/actions?query=workflow%3Acucumber-tests)](https://github.com/Ebazhanov/python-cucumber-junit2html-report/actions?query=workflow%3Acucumber-tests)
 
 ## Automated Testing with "junit2html" Plugin
 
