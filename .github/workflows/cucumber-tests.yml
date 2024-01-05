@@ -37,7 +37,11 @@ jobs:
 
     - name: Convert Merged JUnit XML to HTML
       run: |
-        junit2html merged_reports_${{ matrix.test_set }}.xml -o reports/html-reports/merged_report_${{ matrix.test_set }}.html
+        junit2html merged_reports_${{ matrix.test_set }}.xml
+
+    - name: Rename HTML report file
+      run: |
+        mv junit-report.html reports/html-reports/merged_report_${{ matrix.test_set }}.html
 
     - name: List HTML reports
       run: |
