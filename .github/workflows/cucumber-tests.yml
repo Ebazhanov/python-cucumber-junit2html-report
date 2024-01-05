@@ -18,7 +18,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
-    - name: Run Cucumber tests and generate JUnit XML report
+    - name: Run Cucumber tests and generate JUnit XML reports
       run: |
         # Replace the following command with the actual command to run your Cucumber tests
         python -m behave --junit --junit-directory=reports
@@ -26,9 +26,11 @@ jobs:
     - name: Install junit2html
       run: |
         pip install junit2html
-    - name: Convert JUnit XML to HTML
+    - name: Convert JUnit XML to HTML for each report
       run: |
-        junit2html reports/*.xml
+        for xml_file in reports/*.xml; do
+          junit2html "$xml_file" --output reports/$(basename "$xml_file" .xml).html
+        done
     - name: List HTML reports
       run: |
         ls -R reports
