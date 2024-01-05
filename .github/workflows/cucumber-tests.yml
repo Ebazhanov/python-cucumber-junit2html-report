@@ -33,10 +33,11 @@ jobs:
 
     - name: Convert JUnit XML to HTML
       run: |
-        cd reports && junit2html *.xml && cd ..
+        mkdir -p reports/html-reports
+        cd reports && junit2html *.xml && mv *.html html-reports && cd ..
 
     - name: Upload JUnit HTML reports
       uses: actions/upload-artifact@v2
       with:
         name: junit-html-reports
-        path: reports
+        path: reports/html-reports
