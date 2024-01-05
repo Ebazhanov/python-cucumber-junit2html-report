@@ -28,9 +28,7 @@ jobs:
         pip install junit2html
     - name: Convert JUnit XML to HTML for each report
       run: |
-        for xml_file in reports/*.xml; do
-          junit2html "$xml_file" --output reports/$(basename "$xml_file" .xml).html
-        done
+        find reports -name '*.xml' -exec sh -c 'junit2html "$0" > "${0%.xml}.html"' {} \;
     - name: List HTML reports
       run: |
         ls -R reports
