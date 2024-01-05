@@ -23,8 +23,7 @@ jobs:
 
     - name: Run Cucumber tests and generate JUnit XML report
       run: |
-        # Replace the following command with the actual command to run your Cucumber tests
-        python -m behave --junit --junit-directory=reports
+        behave -f junit -o reports/
       continue-on-error: true  # Continue even if tests fail to ensure the report is generated
 
     - name: List contents of the reports directory
@@ -34,7 +33,7 @@ jobs:
       run: |
         pip install pytest pytest-html
 
-    - name: Convert Merged JUnit XML to HTML using pytest-html
+    - name: Convert JUnit XML to HTML using pytest-html
       run: |
         pytest --junitxml=reports/merged_results.xml --html=reports/summary_report.html
 
