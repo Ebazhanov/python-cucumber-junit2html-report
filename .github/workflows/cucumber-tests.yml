@@ -23,6 +23,8 @@ jobs:
         # Replace the following command with the actual command to run your Cucumber tests
         python -m behave --junit --junit-directory=reports
       continue-on-error: true  # Continue even if tests fail to ensure the report is generated
+    - name: List contents of the reports directory
+      run: ls -R reports
     - name: Install junit2html
       run: |
         pip install junit2html
