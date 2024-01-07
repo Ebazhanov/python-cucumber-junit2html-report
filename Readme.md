@@ -1,4 +1,5 @@
 [![E2E Tests](https://github.com/Ebazhanov/python-cucumber-junit2html-report/actions/workflows/cucumber-tests.yml/badge.svg)](https://github.com/Ebazhanov/python-cucumber-junit2html-report/actions/workflows/cucumber-tests.yml)
+[![junit2html](https://img.shields.io/badge/junit2html-plugin-green?labelColor=gray&style=flat&logo=a)](https://github.com/inorton/junit2html)
 
 ## Automated Testing with "junit2html" Plugin
 
@@ -11,7 +12,7 @@ This project utilizes the [junit2html](https://github.com/inorton/junit2html) pl
 - `$ python -m unittest tests.test_your_module1`
 
 #### Convert Junit to HTML report based on `xml` files
-- Install plugin (junit2html)[https://github.com/inorton/junit2html]
+- Install plugin [junit2html](https://github.com/inorton/junit2html)
 - `$ behave **/*.feature --junit` //Run tests
 - `$ junit2html reports/*.xml --merge=merged_results.xml` // Merge all *.xml files in one
 - `$ junit2html merged_results.xml --report-matrix=summary_report.html` // Generate HTML report
