@@ -17,6 +17,15 @@ This project utilizes the [junit2html](https://github.com/inorton/junit2html) pl
 - `$ junit2html reports/*.xml --merge=merged_results.xml` // Merge all *.xml files in one
 - `$ junit2html merged_results.xml --report-matrix=summary_report.html` // Generate HTML report
 
+#### Convert Junit to HTML report based on `json` files
+- Can be found in GitHub Actions -> Summary Report
+
+![img.png](img.png)
+
+- Report looks like this:
+
+![img_1.png](img_1.png)
+
 #### Project structure
 
     python-cucumber/
